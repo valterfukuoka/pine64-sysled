@@ -1,0 +1,74 @@
+#!/bin/sh
+### BEGIN INIT INFO
+# Provides:          systemledon
+# Required-Start:    $all
+# Required-Stop:
+# Should-Start:      
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Turn System LED on (booting up signal)
+# Description:       System LED is next to
+#                    audio connector
+### END INIT INFO
+
+# Pine64 System LED "ON"
+#
+echo "359" > /sys/class/gpio/export 
+echo "out" > /sys/class/gpio/gpio359/direction
+#
+# Switch ON
+echo "0"   > /sys/class/gpio/gpio359/value 
+#
+# Or Switch OFF (uncomment to work)
+#echo "1"   > /sys/class/gpio/gpio359/value 
+
+# ---------------------
+# END OF EXECUTION CODE
+# ---------------------
+
+# ----------------------------------------
+# INLINE MANUAL, instructions for the user
+# ----------------------------------------
+
+# ------------------------------------------------------------
+# Picture representing a LED 
+#
+#                     
+#                    ooooo
+#                   o     o
+#                   o     o
+#                   o     o       
+#   (flat base)     ooooooooo    (round base)  
+#                    |   |
+#                    |   |
+#                    |   |
+#                   (-)  |
+#                        |
+#                       (+)      long terminal is the positive
+#                                    
+# ------------------------------------------------------------
+
+# As root, copy or create this file on /etc/init.d/
+# Suggested filename: systemledon
+#
+# After saving this file to /etc/init.d/ directory
+# you then need to run the following 2 commands:
+# 1) chmod 755 /etc/init.d/systemledon
+# 2) update-rc.d systemledon defaults
+#
+
+# How to Remove (if you need to remove it)
+# To remove this start up script:
+# 1) update-rc.d systemledon remove
+# 2) rm /etc/init.d/systemledon
+#
+
+# Tested on:
+# ARMBIAN 5.25 stable Debian GNU/Linux 8 (jessie) 3.10.104-pine64
+# 2017-MAY
+#
+# Board Model
+# Pine64 1GB Model
+# A64-DB-Rev B
+# 2016-02-24
+#
